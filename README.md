@@ -27,7 +27,7 @@ Mở `http://localhost:8005/login`. Mặc định dùng H2 trong bộ nhớ; c�
 
 ## Đối chiếu yêu cầu
 
-Cả hai bản có `POST /auth/signup`, `POST /auth/login` trả `token` và `expiresIn`, `GET /users/me`, `GET /users` với Bearer token, lỗi 401 khi thiếu hoặc sai token, và trang Ajax `/login`, `/user/profile`. Mật khẩu đã mã hóa không được trả ra JSON.
+Cả hai bản có `POST /auth/signup`, `POST /auth/login` trả `token` và `expiresIn`, `GET /users/me`, `GET /users` với Bearer token, lỗi 401 khi thiếu hoặc sai token, và trang Ajax `/login`, `/user/profile`. Giao diện hai trang được giữ tối giản theo ảnh mẫu ở trang 32–34 của PDF; đăng ký và các API còn lại được thử qua Postman như trang 28–29. Mật khẩu đã mã hóa không được trả ra JSON.
 
 | Công việc | JJWT | Nimbus |
 |---|---|---|

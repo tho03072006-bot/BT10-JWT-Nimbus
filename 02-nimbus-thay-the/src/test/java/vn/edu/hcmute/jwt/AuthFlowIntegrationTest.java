@@ -198,14 +198,12 @@ class AuthFlowIntegrationTest {
     }
 
     @Test
-    void sampleAccountsAreSeededAndShownOnLoginPage() throws Exception {
+    void sampleAccountsCanLogIn() throws Exception {
         for (var a : vn.edu.hcmute.jwt.configs.DemoAccounts.ACCOUNTS) {
             String token = loginToken(a.email(), a.password());
             mvc.perform(get("/users/me").header("Authorization", "Bearer " + token))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.fullName").value(a.fullName()));
-            mvc.perform(get("/login")).andExpect(content().string(containsString(a.email())))
-                    .andExpect(content().string(containsString(a.password())));
         }
     }
 

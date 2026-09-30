@@ -1,103 +1,23 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<html lang="vi">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Đăng nhập - JWT Nimbus</title>
+  <title>Login</title>
   <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
-<main class="auth-shell">
-  <div class="auth">
-
-    <aside class="auth-brand">
-      <span class="brand-mark">
-        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 4 7v8c0 7.5 5 13 12 15 7-2 12-7.5 12-15V7z" fill="#fff" fill-opacity=".95"/><path d="M11 16.5l3.5 3.5L21.5 12" fill="none" stroke="#2452d6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        JWT · Nimbus
-      </span>
-      <div>
-        <h1>Xác thực Stateless bằng JSON Web Token</h1>
-        <p>Spring Boot 3, Spring Security 6 và thư viện Nimbus JOSE + JWT.</p>
-      </div>
-      <ol class="flow">
-        <li><span>Đăng nhập gửi <code>POST /auth/login</code>, server ký JWT (HS256) bằng Nimbus.</span></li>
-        <li><span>Trình duyệt giữ token, mỗi request gửi kèm <code>Authorization: Bearer</code>.</span></li>
-        <li><span>Server kiểm tra chữ ký và hạn dùng, không lưu session.</span></li>
-      </ol>
-      <p class="brand-foot">Bài tập BT10 · Lập trình Web · HCMUTE</p>
-    </aside>
-
-    <section class="auth-panel">
-      <div class="tabs" role="tablist" aria-label="Đăng nhập hoặc đăng ký">
-        <button class="tab" id="tab-login" role="tab" aria-selected="true" aria-controls="pane-login" type="button">Đăng nhập</button>
-        <button class="tab" id="tab-signup" role="tab" aria-selected="false" aria-controls="pane-signup" tabindex="-1" type="button">Đăng ký</button>
-      </div>
-
-      <div id="pane-login" role="tabpanel" aria-labelledby="tab-login">
-        <h2 class="panel-title">Chào mừng trở lại</h2>
-        <p class="panel-sub">Đăng nhập để nhận JWT và xem trang cá nhân.</p>
-        <form id="login-form" novalidate>
-          <div class="field">
-            <label for="email">Email</label>
-            <input class="input" type="email" id="email" name="email" autocomplete="username" required placeholder="ten@hcmute.edu.vn">
-          </div>
-          <div class="field">
-            <label for="password">Mật khẩu</label>
-            <div class="input-wrap">
-              <input class="input" type="password" id="password" name="password" autocomplete="current-password" required>
-              <button class="toggle-pw" type="button" data-target="password" aria-controls="password">Hiện</button>
-            </div>
-          </div>
-          <div id="feedback" role="alert" hidden></div>
-          <button id="Login" class="btn btn-block" type="submit">Đăng nhập</button>
-        </form>
-      </div>
-
-      <div id="pane-signup" role="tabpanel" aria-labelledby="tab-signup" hidden>
-        <h2 class="panel-title">Tạo tài khoản</h2>
-        <p class="panel-sub">Mật khẩu được mã hóa BCrypt trước khi lưu.</p>
-        <form id="signup-form" novalidate>
-          <div class="field">
-            <label for="s-fullName">Họ và tên</label>
-            <input class="input" type="text" id="s-fullName" autocomplete="name" required maxlength="50">
-          </div>
-          <div class="field">
-            <label for="s-email">Email</label>
-            <input class="input" type="email" id="s-email" autocomplete="email" required maxlength="100">
-          </div>
-          <div class="field">
-            <label for="s-password">Mật khẩu</label>
-            <div class="input-wrap">
-              <input class="input" type="password" id="s-password" autocomplete="new-password" required minlength="6" maxlength="72">
-              <button class="toggle-pw" type="button" data-target="s-password" aria-controls="s-password">Hiện</button>
-            </div>
-            <span class="hint">Tối thiểu 6 ký tự.</span>
-          </div>
-          <div id="signup-feedback" role="alert" hidden></div>
-          <button id="Signup" class="btn btn-block" type="submit">Đăng ký</button>
-        </form>
-      </div>
-
-      <div class="demo" th:if="${!demoAccounts.isEmpty()}">
-        <h2>Tài khoản mẫu để test</h2>
-        <p>Bấm "Dùng" để điền sẵn vào form đăng nhập.</p>
-        <div class="demo-list">
-          <div class="demo-card" th:each="a : ${demoAccounts}">
-            <div>
-              <strong th:text="${a.fullName}">Họ tên</strong>
-              <span class="meta" th:text="${a.note}">Ghi chú</span>
-              <span class="meta cred">Email: <code th:text="${a.email}">email</code></span>
-              <span class="meta cred">Mật khẩu: <code th:text="${a.password}">mk</code></span>
-            </div>
-            <button type="button" class="btn btn-ghost btn-sm use-demo"
-                    th:attr="data-email=${a.email},data-password=${a.password}">Dùng</button>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-</main>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-<script src="/js/mainjs.js"></script>
+  <main class="container login-page">
+    <form id="login-form">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="username" required>
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+      <button id="Login" type="submit">Login</button>
+    </form>
+    <p id="feedback" role="alert" hidden></p>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <script src="/js/mainjs.js"></script>
 </body>
 </html>
