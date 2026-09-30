@@ -5,7 +5,7 @@ Bài tập môn Lập trình Web (bài giảng `04_JWT.pdf`, ThS. Nguyễn Hữu
 1. Làm bài tập ví dụ "Demo JWT với Spring Boot 3 - Security 6" (10 bước, trang 15-34).
 2. Dùng thư viện **Nimbus JOSE + JWT** thay cho thư viện JWT của bài giảng (`io.jsonwebtoken:jjwt`).
 
-Công nghệ: Java 21, Spring Boot 3.5.16, Spring Security 6.5, Spring Data JPA, Thymeleaf, Nimbus JOSE + JWT 10.10, H2 (mặc định) hoặc MySQL, Lombok, jQuery/Bootstrap.
+Công nghệ: Java 21, Spring Boot 3.5.16, Spring Security 6.5, Spring Data JPA, Thymeleaf, Nimbus JOSE + JWT 10.10, H2 (mặc định) hoặc MySQL, Lombok, jQuery và CSS riêng.
 
 ## Chạy ứng dụng
 
@@ -28,9 +28,26 @@ Profile `mysql` đọc `DB_USERNAME` (mặc định `root`) và `DB_PASSWORD`, t
 | `JWT_SECRET`    | Secret HS256 dạng Base64/hex, tối thiểu 256 bit. Có giá trị mặc định chỉ để demo local, khi triển khai thật phải đổi. |
 | `DB_USERNAME`, `DB_PASSWORD` | Chỉ dùng với profile `mysql` |
 
+## Tài khoản mẫu để test
+
+Tự tạo khi khởi động và hiển thị ngay trên trang đăng nhập (bấm "Dùng" để điền sẵn):
+
+| Họ tên | Email | Mật khẩu |
+|--------|-------|----------|
+| Nguyễn Hữu Trung | `trungnh@hcmute.edu.vn` | `123456` |
+| Trần Minh Thọ | `sinhvien@hcmute.edu.vn` | `Demo@123` |
+
+Chỉ dùng để demo. Khi triển khai thật đặt `app.demo.enabled=false` để không tạo tài khoản và không hiển thị chúng.
+
+## Giao diện
+
+- Trang đăng nhập: hai tab Đăng nhập / Đăng ký, nút Hiện/Ẩn mật khẩu, thông báo lỗi ngay tại form, thẻ tài khoản mẫu.
+- Trang cá nhân: thông tin người dùng, token thô tô màu Header/Payload/Signature, đếm ngược thời gian hết hạn, nút sao chép token, và khu "Thử gọi API" (có token, không token, token bị sửa payload) để thấy 200/401 tận mắt.
+- Tự đổi sáng/tối theo hệ thống, dùng được trên điện thoại, điều khiển được bằng bàn phím.
+
 ## Kịch bản demo (bước 9 và 10 của bài giảng)
 
-1. Vào `/login`, tạo tài khoản ở khung "Tạo tài khoản" (`POST /auth/signup`).
+1. Vào `/login`, tạo tài khoản ở tab "Đăng ký" (`POST /auth/signup`) hoặc dùng tài khoản mẫu.
 2. Đăng nhập (`POST /auth/login`) nhận `{"token": "...", "expiresIn": 3600000}`. Token lưu trong `localStorage`, trang chuyển sang `/user/profile`.
 3. Trang profile gọi Ajax `GET /users/me` kèm `Authorization: Bearer <token>` và hiển thị họ tên, ảnh.
 4. Logout xóa token và quay về `/login`.
@@ -95,9 +112,9 @@ Khác với jjwt, Nimbus không tự kiểm tra hết hạn nên `extractAllClai
 - **Cột `images` NOT NULL**: `RegisterUserModel` không có ảnh nên bài làm gán ảnh mặc định `/images/default-avatar.svg` (có thể truyền `images` khi đăng ký).
 - **Chống XSS**: `mainjs.js` dùng `.text()`/`.attr()` thay `.html()` khi hiển thị `fullName`, `images`.
 - **Ajax**: chỉ gọi `/users/me` ở trang profile, khi 401 thì xóa token và chuyển về `/login` thay vì `alert`.
-- **Thêm** khung đăng ký trên `login.html`, validate đầu vào (400) và email trùng (409).
+- **Thêm** tab đăng ký trên `login.html`, tài khoản mẫu, trang cá nhân hiển thị token, validate đầu vào (400) và email trùng (409).
 - **H2 mặc định** để chạy được ngay; MySQL dùng qua profile `mysql`. Profile `mysql` chưa được chạy thử trên máy này vì chưa có MySQL.
-- Bootstrap tải từ CDN không kèm thuộc tính SRI (`integrity`).
+- jQuery tải từ CDN, không kèm thuộc tính SRI (`integrity`).
 
 ## Kiểm thử
 
@@ -105,7 +122,8 @@ Khác với jjwt, Nimbus không tự kiểm tra hết hạn nên `extractAllClai
 ./mvnw test
 ```
 
-22 test:
+24 test:
 
 - `JwtServiceTest` (10): sinh token HS256, claim `sub`/`exp`, claim bổ sung, `isTokenValid`, payload bị sửa, sai secret, hết hạn, `alg: none`, HS384, token rác, secret ngắn hơn 256 bit.
-- `AuthFlowIntegrationTest` (12): signup (không lộ password, email trùng 409, dữ liệu sai 400), login (đúng, sai mật khẩu 401), `/users/me`, `/users/`, thiếu token 401, token bị sửa 401, token hết hạn 401, token rác 401, token của user không tồn tại 401, các trang HTML và tài nguyên tĩnh.
+- `AuthFlowIntegrationTest` (13): signup (không lộ password, email trùng 409, dữ liệu sai 400), login (đúng, sai mật khẩu 401), `/users/me`, `/users/`, thiếu token 401, token bị sửa 401, token hết hạn 401, token rác 401, token của user không tồn tại 401, tài khoản mẫu đăng nhập được, các trang HTML và tài nguyên tĩnh.
+- `DemoDisabledTest` (1): `app.demo.enabled=false` thì trang login không hiện tài khoản mẫu.

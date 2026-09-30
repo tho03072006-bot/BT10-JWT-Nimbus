@@ -196,10 +196,24 @@ class AuthFlowIntegrationTest {
     }
 
     @Test
+    void sampleAccountsAreSeededAndShownOnLoginPage() throws Exception {
+        for (var a : vn.edu.hcmute.jwt.configs.DemoAccounts.ACCOUNTS) {
+            String token = loginToken(a.email(), a.password());
+            mvc.perform(get("/users/me").header("Authorization", "Bearer " + token))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.fullName").value(a.fullName()));
+            mvc.perform(get("/login")).andExpect(content().string(containsString(a.email())))
+                    .andExpect(content().string(containsString(a.password())));
+        }
+    }
+
+    @Test
     void pagesAreServedWithoutTokenAndUseMainJs() throws Exception {
         mvc.perform(get("/login")).andExpect(status().isOk())
                 .andExpect(content().string(containsString("id=\"Login\"")))
-                .andExpect(content().string(containsString("/js/mainjs.js")));
+                .andExpect(content().string(containsString("/js/mainjs.js")))
+                .andExpect(content().string(containsString("/css/app.css")));
+        mvc.perform(get("/css/app.css")).andExpect(status().isOk());
         mvc.perform(get("/user/profile")).andExpect(status().isOk())
                 .andExpect(content().string(containsString("id=\"profile\"")));
         mvc.perform(get("/js/mainjs.js")).andExpect(status().isOk());

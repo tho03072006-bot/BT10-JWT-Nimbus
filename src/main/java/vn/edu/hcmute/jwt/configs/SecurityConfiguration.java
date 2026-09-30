@@ -46,7 +46,7 @@ public class SecurityConfiguration {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
                         // Trang HTML va tai nguyen tinh: du lieu thuc su van phai co token (goi Ajax /users/me).
-                        .requestMatchers("/", "/auth/**", "/login**", "/user/**", "/images/**", "/js/**",
+                        .requestMatchers("/", "/auth/**", "/login**", "/user/**", "/images/**", "/js/**", "/css/**",
                                 "/error").permitAll()
                         .anyRequest()
                         .authenticated()
