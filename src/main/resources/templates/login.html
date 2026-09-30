@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container" style="min-height: 500px">
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-5">
+      <h1 class="h4">Đăng nhập bằng JWT (Nimbus)</h1>
+      <form action="" method="post" id="login-form">
+        <label for="email" class="form-label mt-2">Email</label>
+        <input type="email" class="form-control" name="email" id="email" required="required" autocomplete="username">
+        <label for="password" class="form-label mt-2">Password</label>
+        <input type="password" class="form-control" name="password" id="password" required="required"
+               autocomplete="current-password">
+        <button id="Login" type="button" class="btn btn-primary mt-3">Login</button>
+      </form>
+      <div id="feedback" class="text-danger mt-2" role="alert"></div>
+
+      <hr class="my-4">
+      <h2 class="h5">Tạo tài khoản (POST /auth/signup)</h2>
+      <form action="" method="post" id="signup-form">
+        <label for="s-fullName" class="form-label">Họ tên</label>
+        <input type="text" class="form-control" id="s-fullName" required="required" maxlength="50">
+        <label for="s-email" class="form-label mt-2">Email</label>
+        <input type="email" class="form-control" id="s-email" required="required" maxlength="100">
+        <label for="s-password" class="form-label mt-2">Password (tối thiểu 6 ký tự)</label>
+        <input type="password" class="form-control" id="s-password" required="required" minlength="6"
+               autocomplete="new-password">
+        <button id="Signup" type="button" class="btn btn-outline-secondary mt-3">Đăng ký</button>
+      </form>
+      <div id="signup-feedback" class="mt-2" role="status"></div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="/js/mainjs.js"></script>
+</body>
+</html>
