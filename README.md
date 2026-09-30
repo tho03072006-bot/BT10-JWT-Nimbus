@@ -42,7 +42,7 @@ Chỉ dùng để demo. Khi triển khai thật đặt `app.demo.enabled=false` 
 ## Giao diện
 
 - Trang đăng nhập: hai tab Đăng nhập / Đăng ký, nút Hiện/Ẩn mật khẩu, thông báo lỗi ngay tại form, thẻ tài khoản mẫu.
-- Trang cá nhân: thông tin người dùng, token thô tô màu Header/Payload/Signature, đếm ngược thời gian hết hạn, nút sao chép token, và khu "Thử gọi API" (có token, không token, token bị sửa payload) để thấy 200/401 tận mắt.
+- Trang cá nhân: thông tin người dùng và khu "Kiểm tra API của bài lab" (có token, không token, token bị sửa payload) để thấy 200/401. Phần giải thích JWT, token thô, thời gian hết hạn và nút sao chép nằm trong mục mở rộng dành cho học tập.
 - Tự đổi sáng/tối theo hệ thống, dùng được trên điện thoại, điều khiển được bằng bàn phím.
 
 ## Kịch bản demo (bước 9 và 10 của bài giảng)

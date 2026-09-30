@@ -20,7 +20,7 @@
 <main class="wrap">
   <div class="hello">
     <h1>Xin chào, <span id="greet-name">…</span></h1>
-    <p>Bạn đã xác thực bằng JWT. Trang này lấy dữ liệu qua Ajax <code>GET /users/me</code> kèm Bearer token.</p>
+    <p>Thông tin tài khoản của bạn được tải sau khi đăng nhập.</p>
   </div>
 
   <div class="grid">
@@ -36,8 +36,22 @@
     </section>
 
     <div class="stack">
-      <section class="card" aria-labelledby="token-title">
-        <h2 id="token-title">Token của bạn</h2>
+      <section class="card" aria-labelledby="api-title">
+        <h2 id="api-title">Kiểm tra API của bài lab</h2>
+        <p class="section-note">Thử hai API cần Bearer token và xem phản hồi khi thiếu hoặc sửa token.</p>
+        <div class="actions">
+          <button class="btn btn-sm api-call" data-url="/users/me" data-auth="1" type="button">GET /users/me</button>
+          <button class="btn btn-sm api-call" data-url="/users" data-auth="1" type="button">GET /users</button>
+          <button class="btn btn-ghost btn-sm api-call" data-url="/users/me" data-auth="0" type="button">Gọi không kèm token</button>
+          <button class="btn btn-ghost btn-sm api-call" data-url="/users/me" data-auth="tamper" type="button">Gửi token bị sửa</button>
+        </div>
+        <div class="req" id="api-req">Chọn một nút để gọi API.</div>
+        <pre id="json" aria-live="polite">-</pre>
+      </section>
+
+      <details class="card jwt-details">
+        <summary>Chi tiết JWT (dành cho học tập)</summary>
+        <p class="section-note">JWT là thông tin đăng nhập. Chỉ sao chép khi cần thử API và không chia sẻ cho người khác.</p>
         <div class="token-line">
           <span id="token-status" class="status">Đang kiểm tra…</span>
           <button id="copy-token" class="btn btn-ghost btn-sm" type="button">Sao chép token</button>
@@ -52,19 +66,7 @@
           <div><h3>Header</h3><pre id="jwt-header">-</pre></div>
           <div><h3>Payload</h3><pre id="jwt-payload">-</pre></div>
         </div>
-      </section>
-
-      <section class="card" aria-labelledby="api-title">
-        <h2 id="api-title">Thử gọi API</h2>
-        <div class="actions">
-          <button class="btn btn-sm api-call" data-url="/users/me" data-auth="1" type="button">GET /users/me</button>
-          <button class="btn btn-sm api-call" data-url="/users/" data-auth="1" type="button">GET /users/</button>
-          <button class="btn btn-ghost btn-sm api-call" data-url="/users/me" data-auth="0" type="button">Gọi không kèm token</button>
-          <button class="btn btn-ghost btn-sm api-call" data-url="/users/me" data-auth="tamper" type="button">Gửi token bị sửa</button>
-        </div>
-        <div class="req" id="api-req">Chọn một nút để gọi API.</div>
-        <pre id="json" aria-live="polite">-</pre>
-      </section>
+      </details>
     </div>
   </div>
 </main>
