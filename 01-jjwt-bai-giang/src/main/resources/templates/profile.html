@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trang cá nhân - JWT JJWT</title>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-in">
+    <span class="brand-mark">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 4 7v8c0 7.5 5 13 12 15 7-2 12-7.5 12-15V7z" fill="currentColor"/><path d="M11 16.5l3.5 3.5L21.5 12" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      JWT · JJWT
+    </span>
+    <button id="logout" class="btn btn-ghost btn-sm" type="button">Đăng xuất</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hello">
+    <h1>Xin chào, <span id="greet-name">…</span></h1>
+    <p>Thông tin tài khoản của bạn được tải sau khi đăng nhập.</p>
+  </div>
+
+  <div class="grid">
+    <section class="card profile" aria-labelledby="profile-title">
+      <img id="images" class="avatar" src="/images/default-avatar.svg" alt="Ảnh đại diện">
+      <h2 id="profile-title"><span id="profile"></span></h2>
+      <p class="email" id="profile-email"></p>
+      <dl class="facts">
+        <div><dt>ID</dt><dd id="f-id">-</dd></div>
+        <div><dt>Ngày tạo</dt><dd id="f-created">-</dd></div>
+        <div><dt>Tài khoản</dt><dd id="f-enabled">-</dd></div>
+      </dl>
+    </section>
+
+    <div class="stack">
+      <section class="card" aria-labelledby="api-title">
+        <h2 id="api-title">Kiểm tra API của bài lab</h2>
+        <p class="section-note">Thử hai API cần Bearer token và xem phản hồi khi thiếu hoặc sửa token.</p>
+        <div class="actions">
+          <button class="btn btn-sm api-call" data-url="/users/me" data-auth="1" type="button">GET /users/me</button>
+          <button class="btn btn-sm api-call" data-url="/users" data-auth="1" type="button">GET /users</button>
+          <button class="btn btn-ghost btn-sm api-call" data-url="/users/me" data-auth="0" type="button">Gọi không kèm token</button>
+          <button class="btn btn-ghost btn-sm api-call" data-url="/users/me" data-auth="tamper" type="button">Gửi token bị sửa</button>
+        </div>
+        <div class="req" id="api-req">Chọn một nút để gọi API.</div>
+        <pre id="json" aria-live="polite">-</pre>
+      </section>
+
+      <details class="card jwt-details">
+        <summary>Chi tiết JWT (dành cho học tập)</summary>
+        <p class="section-note">JWT là thông tin đăng nhập. Chỉ sao chép khi cần thử API và không chia sẻ cho người khác.</p>
+        <div class="token-line">
+          <span id="token-status" class="status">Đang kiểm tra…</span>
+          <button id="copy-token" class="btn btn-ghost btn-sm" type="button">Sao chép token</button>
+        </div>
+        <div id="jwt-raw" class="jwt-raw" aria-label="JWT thô"></div>
+        <div class="legend">
+          <span><i style="background:#ff8fa3"></i>Header</span>
+          <span><i style="background:#b28cff"></i>Payload</span>
+          <span><i style="background:#5fd6e0"></i>Signature</span>
+        </div>
+        <div class="parts">
+          <div><h3>Header</h3><pre id="jwt-header">-</pre></div>
+          <div><h3>Payload</h3><pre id="jwt-payload">-</pre></div>
+        </div>
+      </details>
+    </div>
+  </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="/js/mainjs.js"></script>
+</body>
+</html>
