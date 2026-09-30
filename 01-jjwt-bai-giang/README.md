@@ -8,4 +8,4 @@ Chạy từ thư mục gốc repository:
 .\mvnw.cmd -pl 01-jjwt-bai-giang spring-boot:run
 ```
 
-Truy cập `http://localhost:8005/login`. Giao diện login và profile được giữ tối giản theo ảnh ở trang 32–34 của PDF. Đăng ký qua Postman bằng `POST /auth/signup`, sau đó `POST /auth/login`, rồi gửi Bearer token đến `GET /users/me` và `GET /users` như trang 28–29. Mặc định dùng H2; profile `mysql` dành cho MySQL như bài giảng.
+Truy cập `http://localhost:8005/login`. Giao diện giữ bản đầy đủ; phần thử API trên trang cá nhân cho phép gửi Bearer token và xem mã trạng thái HTTP cùng JSON như Postman. Đăng ký qua Postman bằng `POST /auth/signup`, sau đó `POST /auth/login`, rồi gửi Bearer token đến `GET /users/me` và `GET /users` như trang 28–29. Mặc định dùng H2; profile `mysql` dành cho MySQL như bài giảng.
