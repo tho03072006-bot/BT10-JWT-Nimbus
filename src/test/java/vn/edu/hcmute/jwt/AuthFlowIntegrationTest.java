@@ -136,11 +136,13 @@ class AuthFlowIntegrationTest {
         signup(email, "123456", "Trung");
         String token = loginToken(email, "123456");
 
-        mvc.perform(get("/users/")).andExpect(status().isUnauthorized());
-        mvc.perform(get("/users/").header("Authorization", "Bearer " + token))
+        mvc.perform(get("/users")).andExpect(status().isUnauthorized());
+        mvc.perform(get("/users").header("Authorization", "Bearer " + token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[?(@.email=='%s')]".formatted(email), hasSize(1)))
                 .andExpect(jsonPath("$[0].password").doesNotExist());
+        mvc.perform(get("/users/").header("Authorization", "Bearer " + token))
+                .andExpect(status().isOk());
     }
 
     @Test

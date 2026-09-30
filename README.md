@@ -62,7 +62,7 @@ curl -X POST localhost:8005/auth/login -H "Content-Type: application/json" \
      -d '{"email":"trungnh@hcmute.edu.vn","password":"123456"}'
 
 curl localhost:8005/users/me -H "Authorization: Bearer <token>"
-curl localhost:8005/users/   -H "Authorization: Bearer <token>"
+curl localhost:8005/users    -H "Authorization: Bearer <token>"
 ```
 
 ## Đối chiếu từng bước của bài giảng
@@ -76,7 +76,7 @@ curl localhost:8005/users/   -H "Authorization: Bearer <token>"
 | 5 | `ApplicationConfiguration` (UserDetailsService, BCrypt, AuthenticationManager, AuthenticationProvider) | `configs/ApplicationConfiguration.java` |
 | 6 | `JwtAuthenticationFilter` | `filter/JwtAuthenticationFilter.java` |
 | 7 | `SecurityConfiguration` (stateless, CORS, permitAll `/auth/**`, `/login**`, `/user/**`, `/images/**`, `/js/**`) | `configs/SecurityConfiguration.java` |
-| 8 | `AuthenticationController` (`/auth/signup`, `/auth/login`), `UserController` (`/users/me`, `/users/`) | `controllers/` |
+| 8 | `AuthenticationController` (`/auth/signup`, `/auth/login`), `UserController` (`/users/me`, `/users`) | `controllers/` |
 | 9 | Test Postman: signup, login, `/users/me`, `/users` | `AuthFlowIntegrationTest` |
 | 10 | Bảng exception (401/403) | `exception/GlobalExceptionHandler.java` |
 | 10 | `login.html`, `profile.html`, `mainjs.js` (Ajax) | `templates/`, `static/js/mainjs.js`, `controllers/WebController.java` |
